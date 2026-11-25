@@ -3,7 +3,10 @@ roles:
   - id: backend
     description: 后端
     resources:
-      knowledge: &a1
-        - common
-      skills: *a1
-      agents: *a1
+      knowledge: [common, java-demo]
+      skills: [common, java-demo]
+      agents: [common, java-demo]
+      mcp: [java-demo]
+      hooks: [java-demo]
+      env: [java-demo]
+      docs: [java-demo]

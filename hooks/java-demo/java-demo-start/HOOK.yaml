@@ -1,0 +1,5 @@
+description: 在 Codex 会话启动时输出 Java demo 调试标记。
+event: SessionStart
+command: 'node "${TEAMAI_HOOK_DIR}/session-start.cjs"'
+timeout: 5
+tools: [codex]

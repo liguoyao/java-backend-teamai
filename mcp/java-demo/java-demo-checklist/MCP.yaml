@@ -1,0 +1,5 @@
+description: 提供 Java 开发规范检查清单。
+transport: stdio
+command: node
+args: ["${TEAMAI_MCP_DIR}/server.cjs"]
+tools: [codex]
