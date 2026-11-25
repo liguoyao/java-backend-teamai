@@ -1,0 +1,9 @@
+version: 1
+roles:
+  - id: backend
+    description: ""
+    resources:
+      knowledge: &a1
+        - backend
+      skills: *a1
+      agents: *a1
