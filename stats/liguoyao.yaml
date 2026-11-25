@@ -1,31 +1,31 @@
 username: liguoyao
-updatedAt: 2026-11-25T02:13:27.196Z
+updatedAt: 2026-11-25T03:38:19.576Z
 skills:
   teamai:
-    count: 1
-    lastUsed: 2026-11-24T02:51:41.412Z
+    count: 2
+    lastUsed: 2026-11-25T02:13:27.631Z
 interventions:
-  sessions: 8
+  sessions: 9
   interrupt: 0
   toolReject: 0
   correction: 0
-prompts: 26
+prompts: 27
 tokens:
-  input: 166047
-  output: 10681
-  cacheRead: 3059840
+  input: 222014
+  output: 11584
+  cacheRead: 3379328
   cacheCreation: 0
 attended:
   interventions:
-    sessions: 8
+    sessions: 9
     interrupt: 0
     toolReject: 0
     correction: 0
-  prompts: 26
+  prompts: 27
   tokens:
-    input: 166047
-    output: 10681
-    cacheRead: 3059840
+    input: 222014
+    output: 11584
+    cacheRead: 3379328
     cacheCreation: 0
   daily:
     2026-11-24:
@@ -40,15 +40,15 @@ attended:
       cacheEligibleInputTokens: 3171542
       priceVersion: litellm-2026-10-31-b264711
     2026-11-25:
-      sessionsEnded: 1
-      sessionsSucceeded: 1
-      promptTurns: 1
-      durationMs: 5659
+      sessionsEnded: 2
+      sessionsSucceeded: 2
+      promptTurns: 2
+      durationMs: 42679
       sessionsCorrected: 0
-      pricedRequests: 1
-      costMicros: 42142
-      cacheReadTokens: 13440
-      cacheEligibleInputTokens: 54345
+      pricedRequests: 7
+      costMicros: 118599
+      cacheReadTokens: 332928
+      cacheEligibleInputTokens: 429800
       priceVersion: litellm-2026-10-31-b264711
 daily:
   2026-11-24:
@@ -63,15 +63,15 @@ daily:
     cacheEligibleInputTokens: 3171542
     priceVersion: litellm-2026-10-31-b264711
   2026-11-25:
-    sessionsEnded: 1
-    sessionsSucceeded: 1
-    promptTurns: 1
-    durationMs: 5659
+    sessionsEnded: 2
+    sessionsSucceeded: 2
+    promptTurns: 2
+    durationMs: 42679
     sessionsCorrected: 0
-    pricedRequests: 1
-    costMicros: 42142
-    cacheReadTokens: 13440
-    cacheEligibleInputTokens: 54345
+    pricedRequests: 7
+    costMicros: 118599
+    cacheReadTokens: 332928
+    cacheEligibleInputTokens: 429800
     priceVersion: litellm-2026-10-31-b264711
 outcomes:
   attended:
