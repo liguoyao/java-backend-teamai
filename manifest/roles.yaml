@@ -1,0 +1,9 @@
+version: 1
+roles:
+  - id: backend
+    description: 后端
+    resources:
+      knowledge: &a1
+        - common
+      skills: *a1
+      agents: *a1
