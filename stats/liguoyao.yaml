@@ -1,5 +1,5 @@
 username: liguoyao
-updatedAt: 2026-11-25T01:36:24.358Z
+updatedAt: 2026-11-25T01:36:31.701Z
 skills:
   teamai:
     count: 1
@@ -11,9 +11,9 @@ interventions:
   correction: 0
 prompts: 13
 tokens:
-  input: 62571
-  output: 5284
-  cacheRead: 1523200
+  input: 103476
+  output: 5397
+  cacheRead: 1536640
   cacheCreation: 0
 attended:
   interventions:
@@ -23,9 +23,9 @@ attended:
     correction: 0
   prompts: 13
   tokens:
-    input: 62571
-    output: 5284
-    cacheRead: 1523200
+    input: 103476
+    output: 5397
+    cacheRead: 1536640
     cacheCreation: 0
   daily:
     2026-11-24:
@@ -39,6 +39,17 @@ attended:
       cacheReadTokens: 1523200
       cacheEligibleInputTokens: 1585771
       priceVersion: litellm-2026-10-31-b264711
+    2026-11-25:
+      sessionsEnded: 1
+      sessionsSucceeded: 1
+      promptTurns: 1
+      durationMs: 5659
+      sessionsCorrected: 0
+      pricedRequests: 1
+      costMicros: 42142
+      cacheReadTokens: 13440
+      cacheEligibleInputTokens: 54345
+      priceVersion: litellm-2026-10-31-b264711
 daily:
   2026-11-24:
     sessionsEnded: 2
@@ -50,6 +61,17 @@ daily:
     costMicros: 165150
     cacheReadTokens: 1523200
     cacheEligibleInputTokens: 1585771
+    priceVersion: litellm-2026-10-31-b264711
+  2026-11-25:
+    sessionsEnded: 1
+    sessionsSucceeded: 1
+    promptTurns: 1
+    durationMs: 5659
+    sessionsCorrected: 0
+    pricedRequests: 1
+    costMicros: 42142
+    cacheReadTokens: 13440
+    cacheEligibleInputTokens: 54345
     priceVersion: litellm-2026-10-31-b264711
 outcomes:
   attended:
