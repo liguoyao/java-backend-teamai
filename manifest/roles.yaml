@@ -4,7 +4,7 @@ roles:
     description: 后端
     resources:
       knowledge: [common, java-demo]
-      skills: [common, java-demo]
+      skills: [common]
       agents: [common, java-demo]
       mcp: [java-demo]
       hooks: [java-demo]
