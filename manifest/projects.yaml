@@ -24,3 +24,15 @@ projects:
         - payment
       agents:
         - payment
+  - id: java-demo
+    name: ""
+    description: ""
+    resources:
+      knowledge:
+        - java-demo
+      skills:
+        - java-demo
+      learnings:
+        - java-demo
+      agents:
+        - java-demo
