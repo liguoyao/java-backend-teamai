@@ -108,7 +108,7 @@ outcomes:
         output: 17495
       interventions: 0
 workflows:
-  runs: 3
+  runs: 4
   succeeded: 1
-  failed: 2
-  totalDurationMs: 387270
+  failed: 3
+  totalDurationMs: 914611

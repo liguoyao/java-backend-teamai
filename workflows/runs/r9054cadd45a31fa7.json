@@ -3,13 +3,93 @@
   "run": "r9054cadd45a31fa7",
   "workflow": "demo-java-delivery",
   "sourceHash": "c03fc39c1e8ab3501b776cb2e37786647bc83876695ddc43e3a7687ee5aaa2dd",
-  "phase": "start",
+  "phase": "end",
   "runMode": "attended",
   "origin": {
     "source": "team"
   },
-  "status": "running",
+  "status": "failed",
   "startedAt": "2026-11-26T08:35:38.966Z",
   "username": "liguoyao",
-  "publishedAt": "2026-11-26T08:35:39.128Z"
+  "publishedAt": "2026-11-26T08:44:26.316Z",
+  "driver": {
+    "kind": "skill"
+  },
+  "failure": {
+    "code": "read_only_dirty"
+  },
+  "endedAt": "2026-11-26T08:44:26.307Z",
+  "retainedUntil": "2026-12-10T08:44:26.307Z",
+  "durationMs": 527341,
+  "steps": [
+    {
+      "step": "analyze",
+      "pass": 1,
+      "outcome": "success",
+      "unenforced": [
+        {
+          "requirement": "withhold",
+          "keys": [
+            "JAVA_DEMO_PROFILE"
+          ]
+        }
+      ],
+      "runMode": "attended"
+    },
+    {
+      "step": "delivery",
+      "pass": 1,
+      "outcome": "failed"
+    },
+    {
+      "step": "delivery.implement",
+      "pass": 1,
+      "outcome": "success",
+      "unenforced": [
+        {
+          "requirement": "withhold",
+          "keys": [
+            "JAVA_DEMO_PROFILE"
+          ]
+        }
+      ],
+      "runMode": "attended",
+      "outcomes": [
+        {
+          "kind": "commit",
+          "sha": "5d9ad660a910bfb165a3842d1e831574ebbc55cc"
+        }
+      ]
+    },
+    {
+      "step": "delivery.test",
+      "pass": 1,
+      "outcome": "failed",
+      "unenforced": [
+        {
+          "requirement": "withhold",
+          "keys": [
+            "JAVA_DEMO_PROFILE"
+          ]
+        }
+      ],
+      "runMode": "attended"
+    },
+    {
+      "step": "delivery.review",
+      "pass": 1
+    },
+    {
+      "step": "delivery.propose",
+      "pass": 1
+    }
+  ],
+  "stepCounts": {
+    "total": 6,
+    "succeeded": 2,
+    "failed": 2,
+    "skipped": 2,
+    "cancelled": 0
+  },
+  "iterations": 3
 }
