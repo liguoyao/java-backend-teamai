@@ -30,6 +30,7 @@ steps:
     needs: [draft]
     if: inputs.score
     workflow: teamai-score
+    timeout: 600s
     with:
       subject: "session:{{ inputs.source }}:{{ inputs.session }}"
       scorers: [demo-learning-quality]
