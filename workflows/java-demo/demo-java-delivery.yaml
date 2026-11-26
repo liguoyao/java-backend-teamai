@@ -1,0 +1,92 @@
+schemaVersion: v1alpha1
+name: demo-java-delivery
+description: 对 Demo 的 Java 需求执行分析、实现、Maven 测试、代码审查和 PR 交付。
+invoke: ask
+inputs:
+  requirement: string
+steps:
+  - id: analyze
+    workspace: read-only
+    prompt: |-
+      阅读业务仓库中的 Java 源码、pom.xml 和现有测试，分析以下需求。
+      {{ inputs.requirement }}
+
+      明确验收条件、受影响的模块和接口、兼容性、风险及验证范围。
+      返回 status 为 ready 或 blocked。需求存在影响实现的关键缺口时，
+      返回 blocked 并在 plan 写明待确认事项。此步骤只分析。
+    output: { status: ready | blocked, plan: string }
+
+  - id: delivery
+    needs: [analyze]
+    if: steps.analyze.outputs.status == 'ready'
+    workspace: new
+    workflow:
+      steps:
+        - id: implement
+          workspace: continue
+          prompt: |-
+            实现 Java 需求及其验收条件，遵循业务仓库的分层与代码约定。
+            需求：{{ inputs.requirement }}
+            分析结论：{{ steps.analyze.outputs.plan }}
+
+            处理已识别的边界情况，保留既有调用行为，并按验收需要调整测试。
+            返回修改内容、涉及文件及应验证的范围。由 TeamAI 管理提交。
+          output: { summary: string }
+
+        - id: test
+          needs: [implement]
+          workspace: read-only
+          timeout: 20m
+          prompt: |-
+            按仓库提供的 test-check 技能验证实现后的代码。
+            变更摘要：{{ steps.implement.outputs.summary }}
+
+            检查受影响的 Maven 模块和测试，优先使用仓库的 Maven Wrapper，
+            实际执行相关测试，核对构建退出状态和测试报告。
+            返回实际命令、通过或失败的测试数和失败摘要。
+            只有构建成功且所需测试确实执行并通过时返回 passed。
+            测试失败返回 failed，测试无法启动或未覆盖必要范围时返回 blocked。
+          output: { status: passed | failed | blocked, result: string }
+
+        - id: review
+          needs: [implement, test]
+          workspace: read-only
+          prompt: |-
+            独立审查本次改动，核对需求、分析结论、实际差异和测试结果。
+            需求：{{ inputs.requirement }}
+            实现摘要：{{ steps.implement.outputs.summary }}
+            测试结果：{{ steps.test.outputs.result }}
+
+            检查业务逻辑、异常处理、事务边界、幂等性和安全性。
+            对发现的问题说明文件位置及实际影响。存在阻塞问题时返回 changes_requested，
+            否则返回 approved。此步骤只审查。
+          output: { status: approved | changes_requested, findings: string }
+
+        - id: propose
+          needs: [test, review]
+          if: steps.test.outputs.status == 'passed' && steps.review.outputs.status == 'approved'
+          approve:
+            required: true
+            message: |-
+              Maven 验证通过，代码审查已通过。是否将此次变更提交为业务仓库的 Pull Request？
+              测试结果：{{ steps.test.outputs.result }}
+              审查结果：{{ steps.review.outputs.findings }}
+          workspace: continue
+          command: git rev-parse --verify HEAD
+          deliver: pr
+      outputs:
+        implementation: steps.implement.outputs.summary
+        test_status: steps.test.outputs.status
+        test_result: steps.test.outputs.result
+        review_status: steps.review.outputs.status
+        review_findings: steps.review.outputs.findings
+        delivery_outcome: steps.propose.outcome
+outputs:
+  analysis_status: steps.analyze.outputs.status
+  analysis: steps.analyze.outputs.plan
+  implementation: steps.delivery.outputs.implementation
+  test_status: steps.delivery.outputs.test_status
+  test_result: steps.delivery.outputs.test_result
+  review_status: steps.delivery.outputs.review_status
+  review_findings: steps.delivery.outputs.review_findings
+  delivery_outcome: steps.delivery.outputs.delivery_outcome
