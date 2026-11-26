@@ -61,6 +61,8 @@ steps:
             对发现的问题说明文件位置及实际影响。存在阻塞问题时返回 changes_requested，
             否则返回 approved。此步骤只审查。
           output: { status: approved | changes_requested, findings: string }
+          scorers:
+            - java-change-quality
 
         - id: propose
           needs: [test, review]
