@@ -3,14 +3,233 @@
   "run": "r8525e36d61418fa0",
   "workflow": "teamai-new-scorer",
   "sourceHash": "b55c63a240c0627539229396a3b576ed9717628e24541bde3c8d40d2355bbdf4",
-  "phase": "start",
+  "phase": "end",
   "runMode": "attended",
   "origin": {
     "source": "default",
     "teamaiVersion": "0.30.0"
   },
-  "status": "running",
+  "status": "succeeded",
   "startedAt": "2026-11-26T07:04:50.476Z",
   "username": "liguoyao",
-  "publishedAt": "2026-11-26T07:04:50.630Z"
+  "publishedAt": "2026-11-26T07:09:01.736Z",
+  "driver": {
+    "kind": "skill"
+  },
+  "endedAt": "2026-11-26T07:09:01.731Z",
+  "retainedUntil": "2026-12-10T07:09:01.731Z",
+  "durationMs": 251255,
+  "steps": [
+    {
+      "step": "draft",
+      "pass": 1,
+      "outcome": "success",
+      "unenforced": [
+        {
+          "requirement": "withhold",
+          "keys": [
+            "JAVA_DEMO_PROFILE"
+          ]
+        }
+      ],
+      "runMode": "attended"
+    },
+    {
+      "step": "check",
+      "pass": 1,
+      "outcome": "success",
+      "runMode": "attended"
+    },
+    {
+      "step": "try",
+      "pass": 1,
+      "outcome": "success"
+    },
+    {
+      "step": "try.session",
+      "pass": 1,
+      "outcome": "success"
+    },
+    {
+      "step": "try.session.plan",
+      "pass": 1,
+      "outcome": "success",
+      "runMode": "attended"
+    },
+    {
+      "step": "try.session.score",
+      "pass": 1,
+      "outcome": "success"
+    },
+    {
+      "step": "try.session.score[0]",
+      "pass": 1,
+      "outcome": "success"
+    },
+    {
+      "step": "try.session.score[0].evidence",
+      "pass": 1,
+      "outcome": "success",
+      "runMode": "attended"
+    },
+    {
+      "step": "try.session.score[0].check",
+      "pass": 1
+    },
+    {
+      "step": "try.session.score[0].ci",
+      "pass": 1
+    },
+    {
+      "step": "try.session.score[0].protected",
+      "pass": 1
+    },
+    {
+      "step": "try.session.score[0].judge",
+      "pass": 1,
+      "tool": "codex",
+      "outcome": "success",
+      "unenforced": [
+        {
+          "requirement": "withhold",
+          "keys": [
+            "JAVA_DEMO_PROFILE"
+          ]
+        }
+      ],
+      "runMode": "attended"
+    },
+    {
+      "step": "try.session.score[0].label",
+      "pass": 1,
+      "outcome": "success",
+      "runMode": "attended"
+    },
+    {
+      "step": "try.session.score[0].write",
+      "pass": 1,
+      "outcome": "success",
+      "runMode": "attended"
+    },
+    {
+      "step": "try.session.score[0].publish",
+      "pass": 1
+    },
+    {
+      "step": "try.session.score[0].settle",
+      "pass": 1
+    },
+    {
+      "step": "try.control",
+      "pass": 1,
+      "outcome": "success"
+    },
+    {
+      "step": "try.control.plan",
+      "pass": 1,
+      "outcome": "success",
+      "runMode": "attended"
+    },
+    {
+      "step": "try.control.score",
+      "pass": 1,
+      "outcome": "success"
+    },
+    {
+      "step": "try.control.score[0]",
+      "pass": 1,
+      "outcome": "success"
+    },
+    {
+      "step": "try.control.score[0].evidence",
+      "pass": 1,
+      "outcome": "success",
+      "runMode": "attended"
+    },
+    {
+      "step": "try.control.score[0].check",
+      "pass": 1
+    },
+    {
+      "step": "try.control.score[0].ci",
+      "pass": 1
+    },
+    {
+      "step": "try.control.score[0].protected",
+      "pass": 1
+    },
+    {
+      "step": "try.control.score[0].judge",
+      "pass": 1,
+      "tool": "codex",
+      "outcome": "success",
+      "unenforced": [
+        {
+          "requirement": "withhold",
+          "keys": [
+            "JAVA_DEMO_PROFILE"
+          ]
+        }
+      ],
+      "runMode": "attended"
+    },
+    {
+      "step": "try.control.score[0].label",
+      "pass": 1,
+      "outcome": "success",
+      "runMode": "attended"
+    },
+    {
+      "step": "try.control.score[0].write",
+      "pass": 1,
+      "outcome": "success",
+      "runMode": "attended"
+    },
+    {
+      "step": "try.control.score[0].publish",
+      "pass": 1
+    },
+    {
+      "step": "try.control.score[0].settle",
+      "pass": 1
+    },
+    {
+      "step": "try.report",
+      "pass": 1,
+      "outcome": "success",
+      "runMode": "attended"
+    },
+    {
+      "step": "propose",
+      "answer": {
+        "choice": "yes",
+        "channel": "driver",
+        "agent": true
+      },
+      "pass": 1,
+      "outcome": "success",
+      "runMode": "attended",
+      "outcomes": [
+        {
+          "kind": "commit",
+          "sha": "f16ba78e61cf590b644424e3aaf5ce405c3d4076"
+        },
+        {
+          "kind": "pr",
+          "url": "https://github.com/liguoyao/java-backend-teamai/pull/7"
+        }
+      ]
+    }
+  ],
+  "stepCounts": {
+    "total": 31,
+    "succeeded": 21,
+    "failed": 0,
+    "skipped": 10,
+    "cancelled": 0
+  },
+  "iterations": 14,
+  "prs": [
+    "https://github.com/liguoyao/java-backend-teamai/pull/7"
+  ]
 }
