@@ -8,19 +8,16 @@
   "origin": {
     "source": "team"
   },
-  "status": "failed",
+  "status": "succeeded",
   "startedAt": "2026-11-26T08:35:38.966Z",
   "username": "liguoyao",
-  "publishedAt": "2026-11-26T08:44:26.316Z",
+  "publishedAt": "2026-11-26T08:59:34.307Z",
   "driver": {
     "kind": "skill"
   },
-  "failure": {
-    "code": "read_only_dirty"
-  },
-  "endedAt": "2026-11-26T08:44:26.307Z",
+  "endedAt": "2026-11-26T08:59:34.305Z",
   "retainedUntil": "2026-12-10T08:44:26.307Z",
-  "durationMs": 527341,
+  "durationMs": 1435339,
   "steps": [
     {
       "step": "analyze",
@@ -39,7 +36,7 @@
     {
       "step": "delivery",
       "pass": 1,
-      "outcome": "failed"
+      "outcome": "success"
     },
     {
       "step": "delivery.implement",
@@ -76,20 +73,63 @@
       "runMode": "attended"
     },
     {
+      "step": "delivery.test",
+      "pass": 2,
+      "outcome": "success",
+      "unenforced": [
+        {
+          "requirement": "withhold",
+          "keys": [
+            "JAVA_DEMO_PROFILE"
+          ]
+        }
+      ],
+      "runMode": "attended"
+    },
+    {
       "step": "delivery.review",
-      "pass": 1
+      "pass": 1,
+      "outcome": "success",
+      "unenforced": [
+        {
+          "requirement": "withhold",
+          "keys": [
+            "JAVA_DEMO_PROFILE"
+          ]
+        }
+      ],
+      "runMode": "attended"
     },
     {
       "step": "delivery.propose",
-      "pass": 1
+      "answer": {
+        "choice": "yes",
+        "channel": "dashboard",
+        "agent": false
+      },
+      "pass": 1,
+      "outcome": "success",
+      "runMode": "attended",
+      "outcomes": [
+        {
+          "kind": "pr",
+          "url": "https://github.com/liguoyao/muyetian/pull/1"
+        }
+      ]
     }
   ],
   "stepCounts": {
     "total": 6,
-    "succeeded": 2,
-    "failed": 2,
-    "skipped": 2,
+    "succeeded": 6,
+    "failed": 0,
+    "skipped": 0,
     "cancelled": 0
   },
-  "iterations": 3
+  "iterations": 6,
+  "prs": [
+    "https://github.com/liguoyao/muyetian/pull/1"
+  ],
+  "prBranches": [
+    "teamai/r9054cadd45a31fa7/delivery/p1"
+  ]
 }
