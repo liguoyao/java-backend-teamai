@@ -1,5 +1,5 @@
 username: liguoyao
-updatedAt: 2026-11-26T07:13:30.110Z
+updatedAt: 2026-11-26T07:13:40.342Z
 skills:
   teamai:
     count: 7
@@ -57,7 +57,7 @@ attended:
       sessionsEnded: 4
       sessionsSucceeded: 4
       promptTurns: 11
-      durationMs: 1427048
+      durationMs: 1433175
       sessionsCorrected: 0
       pricedRequests: 0
       costMicros: 0
@@ -90,7 +90,7 @@ daily:
     sessionsEnded: 4
     sessionsSucceeded: 4
     promptTurns: 11
-    durationMs: 1427048
+    durationMs: 1433175
     sessionsCorrected: 0
     pricedRequests: 0
     costMicros: 0
