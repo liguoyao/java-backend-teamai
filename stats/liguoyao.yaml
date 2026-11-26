@@ -1,5 +1,5 @@
 username: liguoyao
-updatedAt: 2026-11-26T08:23:31.292Z
+updatedAt: 2026-11-26T08:25:31.146Z
 skills:
   teamai:
     count: 7
@@ -102,10 +102,10 @@ daily:
 outcomes:
   attended:
     none:
-      sessions: 5
+      sessions: 6
       tokens:
-        input: 137482
-        output: 15478
+        input: 173542
+        output: 17495
       interventions: 0
 workflows:
   runs: 3
