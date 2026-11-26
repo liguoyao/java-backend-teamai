@@ -1,0 +1,26 @@
+version: 1
+projects:
+  - id: order
+    name: ""
+    description: ""
+    resources:
+      knowledge:
+        - order
+      skills:
+        - order
+      learnings:
+        - order
+      agents:
+        - order
+  - id: payment
+    name: ""
+    description: ""
+    resources:
+      knowledge:
+        - payment
+      skills:
+        - payment
+      learnings:
+        - payment
+      agents:
+        - payment
