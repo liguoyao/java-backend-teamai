@@ -1,5 +1,11 @@
 version: 1
 projects:
+  - id: test
+    name: 测试
+    description: 运行和验证受影响的测试
+    resources:
+      skills:
+        - test
   - id: order
     name: ""
     description: ""

@@ -1,0 +1,18 @@
+skills:
+  java-demo-check:
+    - java
+    - java-demo
+  test-check:
+    - test
+rules:
+  backend/alibaba-java-guidelines:
+    - backend
+    - java
+  backend/backend-test:
+    - backend
+    - test
+  java-demo/java-demo-style:
+    - java
+    - java-demo
+  test/test-test:
+    - test
