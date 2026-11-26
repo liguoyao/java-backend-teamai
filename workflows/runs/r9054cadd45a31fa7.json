@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "v1alpha1",
+  "run": "r9054cadd45a31fa7",
+  "workflow": "demo-java-delivery",
+  "sourceHash": "c03fc39c1e8ab3501b776cb2e37786647bc83876695ddc43e3a7687ee5aaa2dd",
+  "phase": "start",
+  "runMode": "attended",
+  "origin": {
+    "source": "team"
+  },
+  "status": "running",
+  "startedAt": "2026-11-26T08:35:38.966Z",
+  "username": "liguoyao",
+  "publishedAt": "2026-11-26T08:35:39.128Z"
+}
