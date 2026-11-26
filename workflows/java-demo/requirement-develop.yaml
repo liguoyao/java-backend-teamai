@@ -1,0 +1,99 @@
+schemaVersion: v1alpha1
+name: requirement-develop
+description: 按 GitHub Spec Kit 的 Full SDD Cycle 完成需求规格、方案、任务拆分和实现。
+invoke: ask
+inputs:
+  spec: string
+
+# Upstream: https://github.com/github/spec-kit/blob/main/workflows/speckit/workflow.yml
+# Full SDD Cycle 1.0.2. TeamAI owns the workspace and approval state.
+steps:
+  - id: sdd
+    workspace: new
+    workflow:
+      steps:
+        - id: specify
+          workspace: continue
+          prompt: |-
+            执行 Spec Kit 的 Specify 阶段。阅读仓库说明和已有项目章程，若有 Spec Kit
+            规格或模板则沿用其结构。根据下列需求创建新的功能目录 specs/<简短功能名>，
+            避免覆盖既有功能。创建 spec.md 和 checklists/requirements.md。
+            需求：
+            {{ inputs.spec }}
+
+            在 spec.md 记录用户场景、优先级、可独立验证的验收场景、边界条件、
+            功能要求和可衡量的成功标准。标明需评审人确认的关键假设或问题。
+            规格聚焦业务行为。返回相对于仓库根目录的功能目录和具体评审摘要。
+          output: { feature_dir: string, summary: string }
+
+        - id: review-spec
+          needs: [specify]
+          workspace: continue
+          approve:
+            required: true
+            message: |-
+              请审核 {{ steps.specify.outputs.feature_dir }}/spec.md 后决定是否进入方案阶段。
+              {{ steps.specify.outputs.summary }}
+          command: git rev-parse --verify HEAD
+
+        - id: plan
+          needs: [specify, review-spec]
+          workspace: continue
+          prompt: |-
+            执行 Spec Kit 的 Plan 阶段。阅读 {{ steps.specify.outputs.feature_dir }}/spec.md、
+            项目章程（如有）及相关源码、构建配置和测试。在同一功能目录创建 plan.md，
+            说明技术背景、架构、受影响模块、约束、验证策略和章程检查结果。
+            按需生成 research.md、data-model.md、contracts/ 和 quickstart.md。
+            沿用仓库已有的 Spec Kit 模板（如有）。在计划中解决技术层面的待定项并记录依据。
+            返回供审核的技术方案、主要取舍和验证计划。此阶段只更新规划产物。
+          output: { summary: string }
+
+        - id: review-plan
+          needs: [specify, plan]
+          workspace: continue
+          approve:
+            required: true
+            message: |-
+              请审核 {{ steps.specify.outputs.feature_dir }}/plan.md 后决定是否生成任务。
+              {{ steps.plan.outputs.summary }}
+          command: git rev-parse --verify HEAD
+
+        - id: tasks
+          needs: [specify, review-plan]
+          workspace: continue
+          prompt: |-
+            执行 Spec Kit 的 Tasks 阶段。阅读 {{ steps.specify.outputs.feature_dir }}/ 下
+            已通过审核的规格、计划和适用的设计产物。在该目录创建 tasks.md。
+            按准备、基础、用户故事和收尾组织任务。每项任务用复选框和唯一 ID，
+            写明涉及的文件、依赖和可执行的验收方式。标记可安全并行的任务，
+            让每个用户故事可独立交付和验证。此阶段只生成任务清单。
+          output: { summary: string }
+
+        - id: implement
+          needs: [specify, tasks]
+          workspace: continue
+          prompt: |-
+            执行 Spec Kit 的 Implement 阶段。阅读 {{ steps.specify.outputs.feature_dir }}/ 下的
+            spec.md、plan.md、tasks.md 和适用的设计产物。检查 checklists/ 下的清单。
+            若仍存在未经确认的检查项，停止实现并返回 blocked，列出需要评审的条目。
+            评审人维护自定义清单。按依赖顺序实现任务，实际完成并验证后再勾选 tasks.md
+            对应项。使用仓库约定的验证命令，Java Maven 项目优先使用 Maven Wrapper。
+            返回实际改动、运行的命令、验证结果和未完成任务。只有所有任务及必要验证
+            均完成才返回 implemented。有实现或验证阻碍时返回 blocked 并写明原因。
+          output: { status: implemented | blocked, summary: string }
+
+      outputs:
+        feature_dir: steps.specify.outputs.feature_dir
+        spec_summary: steps.specify.outputs.summary
+        plan_summary: steps.plan.outputs.summary
+        tasks_summary: steps.tasks.outputs.summary
+        implementation_status: steps.implement.outputs.status
+        implementation_summary: steps.implement.outputs.summary
+
+outputs:
+  feature_dir: steps.sdd.outputs.feature_dir
+  spec_summary: steps.sdd.outputs.spec_summary
+  plan_summary: steps.sdd.outputs.plan_summary
+  tasks_summary: steps.sdd.outputs.tasks_summary
+  implementation_status: steps.sdd.outputs.implementation_status
+  implementation_summary: steps.sdd.outputs.implementation_summary
