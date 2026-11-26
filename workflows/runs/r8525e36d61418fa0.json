@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "v1alpha1",
+  "run": "r8525e36d61418fa0",
+  "workflow": "teamai-new-scorer",
+  "sourceHash": "b55c63a240c0627539229396a3b576ed9717628e24541bde3c8d40d2355bbdf4",
+  "phase": "start",
+  "runMode": "attended",
+  "origin": {
+    "source": "default",
+    "teamaiVersion": "0.30.0"
+  },
+  "status": "running",
+  "startedAt": "2026-11-26T07:04:50.476Z",
+  "username": "liguoyao",
+  "publishedAt": "2026-11-26T07:04:50.630Z"
+}
