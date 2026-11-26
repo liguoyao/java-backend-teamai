@@ -3,13 +3,68 @@
   "run": "ra17f10f28a91c75a",
   "workflow": "demo-java-delivery",
   "sourceHash": "f62064bb5cc1bacaa06200e23626bbd7e451ed8edfa3b2a387bd17248b2ede1a",
-  "phase": "start",
+  "phase": "end",
   "runMode": "attended",
   "origin": {
     "source": "team"
   },
-  "status": "running",
+  "status": "failed",
   "startedAt": "2026-11-26T08:09:46.413Z",
   "username": "liguoyao",
-  "publishedAt": "2026-11-26T08:09:46.576Z"
+  "publishedAt": "2026-11-26T08:10:49.605Z",
+  "driver": {
+    "kind": "skill"
+  },
+  "failure": {
+    "code": "workspace_base"
+  },
+  "endedAt": "2026-11-26T08:10:49.596Z",
+  "retainedUntil": "2026-12-10T08:10:49.596Z",
+  "durationMs": 63183,
+  "steps": [
+    {
+      "step": "analyze",
+      "pass": 1,
+      "outcome": "success",
+      "unenforced": [
+        {
+          "requirement": "withhold",
+          "keys": [
+            "JAVA_DEMO_PROFILE"
+          ]
+        }
+      ],
+      "runMode": "attended"
+    },
+    {
+      "step": "delivery",
+      "pass": 1,
+      "outcome": "failed"
+    },
+    {
+      "step": "delivery.implement",
+      "pass": 1,
+      "outcome": "failed"
+    },
+    {
+      "step": "delivery.test",
+      "pass": 1
+    },
+    {
+      "step": "delivery.review",
+      "pass": 1
+    },
+    {
+      "step": "delivery.propose",
+      "pass": 1
+    }
+  ],
+  "stepCounts": {
+    "total": 6,
+    "succeeded": 1,
+    "failed": 2,
+    "skipped": 3,
+    "cancelled": 0
+  },
+  "iterations": 1
 }
