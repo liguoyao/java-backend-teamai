@@ -3,14 +3,85 @@
   "run": "redf536448f634764",
   "workflow": "teamai-new-scorer",
   "sourceHash": "b55c63a240c0627539229396a3b576ed9717628e24541bde3c8d40d2355bbdf4",
-  "phase": "start",
+  "phase": "end",
   "runMode": "attended",
   "origin": {
     "source": "default",
     "teamaiVersion": "0.30.0"
   },
-  "status": "running",
+  "status": "failed",
   "startedAt": "2026-11-26T07:03:03.823Z",
   "username": "liguoyao",
-  "publishedAt": "2026-11-26T07:03:03.985Z"
+  "publishedAt": "2026-11-26T07:04:16.669Z",
+  "driver": {
+    "kind": "skill"
+  },
+  "failure": {
+    "code": "command_failed"
+  },
+  "endedAt": "2026-11-26T07:04:16.655Z",
+  "retainedUntil": "2026-12-10T07:04:16.655Z",
+  "durationMs": 72832,
+  "steps": [
+    {
+      "step": "draft",
+      "pass": 1,
+      "outcome": "success",
+      "unenforced": [
+        {
+          "requirement": "withhold",
+          "keys": [
+            "JAVA_DEMO_PROFILE"
+          ]
+        }
+      ],
+      "runMode": "attended"
+    },
+    {
+      "step": "check",
+      "pass": 1,
+      "outcome": "success",
+      "runMode": "attended"
+    },
+    {
+      "step": "try",
+      "pass": 1,
+      "outcome": "failed"
+    },
+    {
+      "step": "try.session",
+      "pass": 1,
+      "outcome": "failed"
+    },
+    {
+      "step": "try.session.plan",
+      "pass": 1,
+      "outcome": "failed",
+      "runMode": "attended"
+    },
+    {
+      "step": "try.session.score",
+      "pass": 1
+    },
+    {
+      "step": "try.control",
+      "pass": 1
+    },
+    {
+      "step": "try.report",
+      "pass": 1
+    },
+    {
+      "step": "propose",
+      "pass": 1
+    }
+  ],
+  "stepCounts": {
+    "total": 9,
+    "succeeded": 2,
+    "failed": 3,
+    "skipped": 4,
+    "cancelled": 0
+  },
+  "iterations": 3
 }
