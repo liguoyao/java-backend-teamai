@@ -1,15 +1,18 @@
 username: liguoyao
-updatedAt: 2026-11-26T01:40:57.925Z
+updatedAt: 2026-11-26T02:15:03.511Z
 skills:
   teamai:
     count: 4
     lastUsed: 2026-11-25T10:00:32.207Z
+  java-demo-check:
+    count: 1
+    lastUsed: 2026-11-26T01:43:12.832Z
 interventions:
   sessions: 12
   interrupt: 0
   toolReject: 0
   correction: 0
-prompts: 42
+prompts: 43
 tokens:
   input: 296925
   output: 21778
@@ -21,7 +24,7 @@ attended:
     interrupt: 0
     toolReject: 0
     correction: 0
-  prompts: 42
+  prompts: 43
   tokens:
     input: 296925
     output: 21778
@@ -42,14 +45,24 @@ attended:
     2026-11-25:
       sessionsEnded: 4
       sessionsSucceeded: 4
-      promptTurns: 16
-      durationMs: 1316561
+      promptTurns: 17
+      durationMs: 1586360
       sessionsCorrected: 0
       pricedRequests: 7
       costMicros: 118599
       cacheReadTokens: 3326592
       cacheEligibleInputTokens: 3498375
       priceVersion: litellm-2026-10-31-b264711
+    2026-11-26:
+      sessionsEnded: 1
+      sessionsSucceeded: 1
+      promptTurns: 1
+      durationMs: 144606
+      sessionsCorrected: 0
+      pricedRequests: 0
+      costMicros: 0
+      cacheReadTokens: 0
+      cacheEligibleInputTokens: 0
 daily:
   2026-11-24:
     sessionsEnded: 4
@@ -65,14 +78,24 @@ daily:
   2026-11-25:
     sessionsEnded: 4
     sessionsSucceeded: 4
-    promptTurns: 16
-    durationMs: 1316561
+    promptTurns: 17
+    durationMs: 1586360
     sessionsCorrected: 0
     pricedRequests: 7
     costMicros: 118599
     cacheReadTokens: 3326592
     cacheEligibleInputTokens: 3498375
     priceVersion: litellm-2026-10-31-b264711
+  2026-11-26:
+    sessionsEnded: 1
+    sessionsSucceeded: 1
+    promptTurns: 1
+    durationMs: 144606
+    sessionsCorrected: 0
+    pricedRequests: 0
+    costMicros: 0
+    cacheReadTokens: 0
+    cacheEligibleInputTokens: 0
 outcomes:
   attended:
     none:
