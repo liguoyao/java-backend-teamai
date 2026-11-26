@@ -24,18 +24,32 @@ steps:
             规格聚焦业务行为。返回相对于仓库根目录的功能目录和具体评审摘要。
           output: { feature_dir: string, summary: string }
 
-        - id: review-spec
+        - id: clarify
           needs: [specify]
+          workspace: continue
+          interactive: true
+          prompt: |-
+            澄清 {{ steps.specify.outputs.feature_dir }}/spec.md 中影响范围、业务规则、
+            边界条件或验收的歧义。逐次向用户提出最重要的问题，并在得到答复后
+            将结论写入 spec.md 的澄清记录以及相关条目。已有足够信息时直接完成。
+            仍缺少关键回答时返回 blocked 并列出待确认事项。
+          output: { status: clarified | blocked, summary: string }
+
+        - id: review-spec
+          needs: [specify, clarify]
+          if: steps.clarify.outputs.status == 'clarified'
           workspace: continue
           approve:
             required: true
             message: |-
               请审核 {{ steps.specify.outputs.feature_dir }}/spec.md 后决定是否进入方案阶段。
               {{ steps.specify.outputs.summary }}
+              澄清结果：{{ steps.clarify.outputs.summary }}
           command: git rev-parse --verify HEAD
 
         - id: plan
           needs: [specify, review-spec]
+          if: steps.review-spec.outcome == 'success'
           workspace: continue
           prompt: |-
             制定技术方案。阅读 {{ steps.specify.outputs.feature_dir }}/spec.md、
@@ -46,18 +60,33 @@ steps:
             返回供审核的技术方案、主要取舍和验证计划。此阶段只更新规划产物。
           output: { summary: string }
 
-        - id: review-plan
+        - id: checklist
           needs: [specify, plan]
+          if: steps.plan.outcome == 'success'
+          workspace: continue
+          prompt: |-
+            核对 {{ steps.specify.outputs.feature_dir }}/ 下的需求规格和方案。
+            更新 checklists/requirements.md，逐项检查需求是否完整、明确、一致且可验证，
+            并记录每项依据和发现的缺口。只有证据充分的条目才标记通过。
+            已有的自定义清单由评审人维护。将清单路径和发现的问题交给方案审批，
+            此阶段只更新需求质量清单。
+          output: { summary: string }
+
+        - id: review-plan
+          needs: [specify, plan, checklist]
+          if: steps.checklist.outcome == 'success'
           workspace: continue
           approve:
             required: true
             message: |-
               请审核 {{ steps.specify.outputs.feature_dir }}/plan.md 后决定是否生成任务。
               {{ steps.plan.outputs.summary }}
+              需求质量清单：{{ steps.checklist.outputs.summary }}
           command: git rev-parse --verify HEAD
 
         - id: tasks
           needs: [specify, review-plan]
+          if: steps.review-plan.outcome == 'success'
           workspace: continue
           prompt: |-
             拆分开发任务。阅读 {{ steps.specify.outputs.feature_dir }}/ 下
@@ -67,8 +96,21 @@ steps:
             让每个用户故事可独立交付和验证。此阶段只生成任务清单。
           output: { summary: string }
 
-        - id: implement
+        - id: analyze
           needs: [specify, tasks]
+          if: steps.tasks.outcome == 'success'
+          workspace: read-only
+          prompt: |-
+            对 {{ steps.specify.outputs.feature_dir }}/spec.md、plan.md、tasks.md 和
+            checklists/ 做一致性分析。核对每项需求的实现和验证任务，查找相互冲突的
+            约束、遗漏的边界条件及依赖顺序问题。逐项指出位置、影响和应修正的产物。
+            此阶段只读。存在影响实现或验收的缺口，或需求质量清单仍有未通过项时，
+            返回 blocked，否则返回 ready。
+          output: { status: ready | blocked, findings: string }
+
+        - id: implement
+          needs: [specify, tasks, analyze]
+          if: steps.analyze.outputs.status == 'ready'
           workspace: continue
           prompt: |-
             实现需求并验证。阅读 {{ steps.specify.outputs.feature_dir }}/ 下的
@@ -80,18 +122,46 @@ steps:
             均完成才返回 implemented。有实现或验证阻碍时返回 blocked 并写明原因。
           output: { status: implemented | blocked, summary: string }
 
+        - id: converge
+          needs: [specify, implement]
+          if: steps.implement.outputs.status == 'implemented'
+          workspace: continue
+          prompt: |-
+            验证实现是否满足 {{ steps.specify.outputs.feature_dir }}/ 下的需求规格、方案
+            和任务。核对实际代码、任务状态和验收证据，必要时在临时副本执行补充验证，
+            避免将构建产物写入工作树。全部覆盖且验证通过时返回 converged。
+            如有缺口，只在 tasks.md 的「收敛」小节追加去重后的待办，写明验收方式，
+            返回 gaps_found，并提示重试实现阶段，完成新增任务后再次执行本阶段。
+            保留现有任务内容，不修改业务代码或改写需求。
+            实现验证记录：{{ steps.implement.outputs.summary }}
+          output: { status: converged | gaps_found, findings: string }
+
       outputs:
         feature_dir: steps.specify.outputs.feature_dir
         spec_summary: steps.specify.outputs.summary
+        clarification_status: steps.clarify.outputs.status
+        clarification_summary: steps.clarify.outputs.summary
         plan_summary: steps.plan.outputs.summary
+        checklist_summary: steps.checklist.outputs.summary
         tasks_summary: steps.tasks.outputs.summary
+        analysis_status: steps.analyze.outputs.status
+        analysis_findings: steps.analyze.outputs.findings
         implementation_status: steps.implement.outputs.status
         implementation_summary: steps.implement.outputs.summary
+        convergence_status: steps.converge.outputs.status
+        convergence_findings: steps.converge.outputs.findings
 
 outputs:
   feature_dir: steps.sdd.outputs.feature_dir
   spec_summary: steps.sdd.outputs.spec_summary
+  clarification_status: steps.sdd.outputs.clarification_status
+  clarification_summary: steps.sdd.outputs.clarification_summary
   plan_summary: steps.sdd.outputs.plan_summary
+  checklist_summary: steps.sdd.outputs.checklist_summary
   tasks_summary: steps.sdd.outputs.tasks_summary
+  analysis_status: steps.sdd.outputs.analysis_status
+  analysis_findings: steps.sdd.outputs.analysis_findings
   implementation_status: steps.sdd.outputs.implementation_status
   implementation_summary: steps.sdd.outputs.implementation_summary
+  convergence_status: steps.sdd.outputs.convergence_status
+  convergence_findings: steps.sdd.outputs.convergence_findings
