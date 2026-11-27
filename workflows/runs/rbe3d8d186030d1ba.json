@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "v1alpha1",
+  "run": "rbe3d8d186030d1ba",
+  "workflow": "requirement-develop",
+  "sourceHash": "135369bc8c92bec5256a1fa88fa8b200a840b3af13b23e0797543a8db5dd0393",
+  "phase": "start",
+  "runMode": "attended",
+  "origin": {
+    "source": "team"
+  },
+  "status": "running",
+  "startedAt": "2026-11-27T09:09:12.575Z",
+  "username": "liguoyao",
+  "publishedAt": "2026-11-27T09:09:12.840Z"
+}
